@@ -1,0 +1,111 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>{{ project }}</title>
+<link rel="stylesheet" type="text/css" href="/static/css/multiLIVEhouse.css" />
+<link rel="icon" href="/static/css/images/favicon.ico" />
+<script type="text/javascript" src="/static/js/jquery.js"></script>
+<script type="text/javascript" src="/static/js/jquery-ui/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="/static/css/jquery-ui.css" />
+<script type="text/javascript" src="/static/js/mustache.js"></script>
+<script type="text/javascript" src="/static/js/multiLIVEhouse.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    absolute_center($("#helpbox"));
+    if ({{ nstreams }} == 0) {
+        hide_chat();
+        $("#helpbox").css('display','block');
+    }
+
+    {% for stream in streams %}
+    streams.push("{{ stream }}");
+    {% endfor %}
+
+    // Setup tabs
+    chat_tabs = $("#chatbox").tabs();
+
+    // Do this after all the jqueryui setup.
+    optimize_size({{ nstreams }});
+    setTimeout(function(){
+        optimize_size({{ nstreams }})
+        }, 500);
+});
+$(window).resize(function() {
+    absolute_center($("#helpbox"));
+    optimize_size(-1);
+});
+</script>
+</head>
+<body>
+<div id="wrapper">
+<div id="streams">
+    {% for stream in streams %}
+    
+    <iframe height="310" width="500" src="https://livehouse.in/embed/channel/{{ stream }}/video" frameborder="0" allowfullscreen></iframe>
+    
+    {% endfor %}
+</div>
+
+<div id="chatbox">
+<ul id="tablist">
+{% for stream in unique_streams %}
+<li><a href="#chat-{{ stream }}">{{ stream }}</a></li>
+{% endfor %}
+</ul>
+{% for stream in unique_streams %}
+<div id="chat-{{ stream }}" class="stream_chat">
+<iframe frameborder="0" scrolling="no" id="chat-{{ stream }}-embed" src="https://livehouse.in/channel/{{ stream }}/chatroom" height="100%" width="100%"></iframe>
+</div>
+{% endfor %}
+</div>
+
+
+<div id="helpbox">
+<h1>MultiLIVEhouse</h1>
+<h1><a target="_blank" href="https://www.facebook.com/fattubo"><img src="/static/css/images/02.png" height="100" width="100"></a></h1>
+<div id="helptext">
+歡迎使用 multiLIVEhouse! 此平台提供了同時觀看多台 <a href="https://livehouse.in/">LIVEhouse.in</a> 實況的功能.<br>
+在 <a href="multilivehouse.appspot.com/KISSRADIO/">multilivehouse.appspot.com/KISSRADIO/</a> 後加上想要觀看的頻道編號可以新增實況台視窗<br>
+使用範例: <a href="http://multilivehouse.appspot.com/KISSRADIO/musou1">multilivehouse.appspot.com/KISSRADIO/musou1</a><br><br>
+
+程式原始碼：<a href="https://github.com/uch71109/multiLIVEhouse">multiLIVEhouse</a>
+</div>
+
+<div id="credits">
+Created by 發桂<br>圖片來源:<a target="_blank" href="https://www.facebook.com/fattubo">肥兔寶</a>
+</div>
+</div>
+
+<div id="change_streams" class="optionbox">
+    <div id="streamlist">
+    {% for stream in streams %}
+    <div class="streamlist_item">
+    <input type="checkbox" checked=true class="check" />
+    <span>{{ stream }}</span>
+    </div>
+    {% endfor %}
+    <div class="streamlist_item">
+    <input type="text" class="stream_name" onkeyup="stream_item_keyup(event)" />
+    </div>
+    </div>
+
+    <div class="fullwidth centering">
+        <a onclick="add_stream_item()">新增實況台視窗</a>
+    </div>
+
+    <div class="fullwidth">
+    <button type="button" class="left" onclick="close_change_streams(false)">取消</button>
+    <button type="button" class="right" onclick="close_change_streams(true)">新增</button>
+    <div class="clear"></div>
+    </div>
+</div>
+
+<div id="bottom_right_bar">
+<a onclick="change_streams()">新增實況台視窗</a>
+|
+<a onclick="toggle_chat()">開關聊天室</a>
+</div>
+
+</div>
+</body>
+</html>

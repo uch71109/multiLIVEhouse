@@ -125,11 +125,11 @@ function stream_item_keyup(e) {
 }
 
 function stream_object(name) {
-    return $('<object type="application/x-shockwave-flash" id="embed_' + name + '" class="stream" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel="' + name + '"><param name="allowFullScreen" value="true" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="wmode" value="opaque" /><param name="flashvars" value="hostname=www.twitch.tv&channel=' + name + '&auto_play=true&start_volume=0" /></object>');
+    return $('<iframe height="310" width="500" src="https://livehouse.in/embed/channel/' + name + '/video" frameborder="0" allowfullscreen></iframe>');
 }
 
 function chat_object(name) {
-    return $('<div id="chat-' + name + '" class="stream_chat"><iframe frameborder="0" scrolling="no" id="chat-' + name + '-embed" src="http://twitch.tv/chat/embed?channel=' + name + '&popout_chat=true" height="100%" width="100%"></iframe></div>');
+    return $('<div id="chat-' + name + '" class="stream_chat"><iframe frameborder="0" scrolling="no" id="chat-' + name + '-embed" src="https://livehouse.in/channel/' + name + '/chatroom" height="100%" width="100%"></iframe></div>');
 }
 
 function chat_tab_object(name) {
