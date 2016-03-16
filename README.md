@@ -24,15 +24,15 @@ pip install Jinja2
 ```
 ## 使用範例
 接下來可以利用App Engine提供的工具將專案進行Deploy
-* 假設多視窗的頻道編號為KISSRADIO, musou1
+* 假設多視窗的頻道編號為cnex, musou1
 則輸入
 ```shell
-http://multilivehouse.appspot.com/KISSRADIO/musou1
+http://multilivehouse.appspot.com/cnex/musou1
 ```
-* 假設多視窗的頻道編號為KISSRADIO, musou1, Haifong
+* 假設多視窗的頻道編號為cnex, musou1, PNNPTS
 則輸入
 ```shell
-http://multilivehouse.appspot.com/KISSRADIO/musou1/Haifong
+http://multilivehouse.appspot.com/cnex/musou1/PNNPTS
 ```
 其他則以此類推
 
