@@ -2,6 +2,8 @@ var chat_hidden = false;
 var num_streams = -1;
 var streams = new Array();
 var chat_tabs;
+var width;
+var height;
 
 function optimize_size(n) {
     // Call with n = -1 to use previously known quantity
@@ -176,7 +178,7 @@ function close_change_streams(apply) {
         var new_stream_inputs = $("#streamlist .stream_name");
         for (var i = 0; i < new_stream_inputs.length; i++) {
             var stream_name = new_stream_inputs[i].value;
-            if (stream_name == "") {
+            if (stream_name == "" || $.inArray(stream_name, new_streams) > -1) {
                 continue;
             }
             new_streams.push(stream_name);
@@ -195,4 +197,49 @@ function close_change_streams(apply) {
     }
     $("#change_streams").hide();
     update_stream_list();
+    adjustWindow()
+}
+
+function initWidthHeight() {
+    width = document.getElementById('streams').offsetWidth;
+    height = document.documentElement.offsetHeight;
+}
+
+function adjustWindow() {
+    var streamList = document.getElementById("streams").getElementsByTagName('iframe');
+    var streamNum = streamList.length;
+    
+    if (streamNum == 1) {
+        streamList[0].width = width;
+        streamList[0].height = width * 9 / 16;
+
+    } else if (streamNum == 2) {
+        var adjustHeight = height / 2; 
+        var adjustWidth = adjustHeight * 16 / 9;
+
+        streamList[0].width = adjustWidth;
+        streamList[0].height = adjustHeight;
+        
+        streamList[1].width = adjustWidth;
+        streamList[1].height = adjustHeight;
+
+    } else if (streamNum > 2) {
+        var halfWidth = width / 2;  
+        var halfHeight = height / 2;
+        var adjustHeight; 
+        var adjustWidth;
+
+        if (halfWidth <= halfHeight) {
+            adjustWidth = halfWidth - 50;
+            adjustHeight = adjustWidth * 9 / 16;
+        } else {
+            adjustHeight = halfHeight - 50;
+            adjustWidth = adjustHeight * 16 / 9;
+        }
+        
+        for (i = 0; i < streamList.length; i++) { 
+            streamList[i].width = adjustWidth;
+            streamList[i].height = adjustHeight;
+        }
+    }
 }

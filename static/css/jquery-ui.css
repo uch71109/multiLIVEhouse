@@ -852,12 +852,12 @@ body .ui-tooltip {
 .ui-state-active,
 .ui-widget-content .ui-state-active,
 .ui-widget-header .ui-state-active {
-    border: 1px solid #5b3f8f;
-    background: -webkit-gradient(linear,left top,left bottom,from(#8266b6),to(#533787));
-    background: -moz-linear-gradient(top,#8266b6,#533787);
-    background: -o-linear-gradient(top,#8266b6,#533787);
-    background: linear-gradient(top,#8266b6,#533787);
-    background-color: #6a4e9e;
+    border: 1px solid #ed6d00;
+    background: -webkit-gradient(linear,left top,left bottom,from(#ed6d00),to(#ed6d00));
+    background: -moz-linear-gradient(top,#ed6d00,#ed6d00);
+    background: -o-linear-gradient(top,#ed6d00,#ed6d00);
+    background: linear-gradient(top,#ed6d00,#ed6d00);
+    background-color: #ed6d00;
     font-weight: normal;
     color: #ffffff;
 }
