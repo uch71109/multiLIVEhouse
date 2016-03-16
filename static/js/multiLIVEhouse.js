@@ -202,7 +202,7 @@ function close_change_streams(apply) {
 
 function initWidthHeight() {
     width = document.getElementById('streams').offsetWidth;
-    height = document.documentElement.offsetHeight;
+    height = document.getElementById('chatbox').offsetHeight;
 }
 
 function adjustWindow() {
